@@ -11,7 +11,7 @@ public class JwtUtil {
     private final String SECRET_KEY = "smartshop_secret_key";
 
     public String generateToken(String username) {
-        DoubleStream Jwts;
+        DoubleStream Jwts = DoubleStream.empty();
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
