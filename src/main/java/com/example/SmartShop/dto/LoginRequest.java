@@ -1,9 +1,11 @@
 package com.example.SmartShop.dto;
 
+import lombok.Data;
+import org.jspecify.annotations.Nullable;
+
+@Data
 public class LoginRequest {
-    private String username;
+    private String email;
     private String password;
 
-    public String getUsername() { return username; }
-    public String getPassword() { return password; }
 }

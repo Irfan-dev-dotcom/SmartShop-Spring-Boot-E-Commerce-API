@@ -1,22 +1,26 @@
-package com.example.SmartShop.config;
+package com.example.SmartShop.util;
 
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
-import java.util.stream.DoubleStream;
 
-@Component
 public class JwtUtil {
-
-    private final String SECRET_KEY = "smartshop_secret_key";
+    private final String SECRET_KEY = "smartbank-secret";
 
     public String generateToken(String username) {
-        DoubleStream Jwts = DoubleStream.empty();
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parser().setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }
